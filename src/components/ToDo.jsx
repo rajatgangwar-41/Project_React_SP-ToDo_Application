@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
-import { MdCheck, MdDeleteForever } from 'react-icons/md'
+import { useState } from 'react'
 import "./ToDo.css"
 import ToDoForm from './ToDoForm';
 import ToDoList from './ToDoList';
 import ToDoDateAndTime from './ToDoDate&Time';
+import { getLocalStorageToDoData, setLocalStorageToDoData } from './ToDoLocalStorage';
 
 const ToDo = () => {
 
-  const [toDoList, setTodoList] = useState([]);
+  const [toDoList, setTodoList] = useState(() => getLocalStorageToDoData());
 
   const onAddToDo = ({id, content, checked}) => {
       if(content === "")
@@ -33,6 +33,8 @@ const ToDo = () => {
   const handleClearAllButton = () => {
     setTodoList([])
   }
+
+  setLocalStorageToDoData(toDoList)
 
   return (
     <section className="todo-container" >
