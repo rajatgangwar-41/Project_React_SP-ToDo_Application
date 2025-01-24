@@ -211,6 +211,7 @@ li span {
     font-size: 1.6rem;
     padding: 1rem 2.2rem;
     border-radius: 0.3rem;
+    cursor: pointer;
     -webkit-border-radius: 0.3rem;
     -moz-border-radius: 0.3rem;
     -ms-border-radius: 0.3rem;

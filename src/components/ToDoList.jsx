@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import { MdCheck, MdDeleteForever } from 'react-icons/md'
 
-const ToDoList = ({ currTask, handleDeleteButton }) => {
+const ToDoList = ({ content, checked, handleCheckButton, handleDeleteButton }) => {
 
-  const [isCheck, setIsCheck] = useState(0);
+  // const [isCheck, setIsCheck] = useState(0);
 
-  const handleCheckButton = () => {
-    setIsCheck(!isCheck) 
-  }
+  // const handleCheckButton = () => {
+  //   setIsCheck(!isCheck) 
+  // }
 
   return (
     <li className='todo-item' >
-      <span className={isCheck ? "checkList" : "notCheckList"} >
-        {currTask}
+      <span className={checked ? "checkList" : "notCheckList"} >
+        {content}
       </span>
-      <button className="check-btn" onClick={() => handleCheckButton() }>
+      <button className="check-btn" onClick={() => handleCheckButton(content) }>
         <MdCheck />
       </button>
-      <button className='delete-btn' onClick={() => handleDeleteButton(currTask) } >
+      <button className='delete-btn' onClick={() => handleDeleteButton(content) } >
         <MdDeleteForever />
       </button>
     </li>

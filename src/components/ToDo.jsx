@@ -9,15 +9,25 @@ const ToDo = () => {
 
   const [toDoList, setTodoList] = useState([]);
 
-  const onAddToDo = (inputValue) => {
-      if(inputValue === "" || toDoList.includes(inputValue)) 
+  const onAddToDo = ({id, content, checked}) => {
+      if(content === "")
         return;
-      
-      setTodoList((prevToDoList) => [...prevToDoList, inputValue] )
+
+      if(!toDoList.find((currTask) => currTask.content === content ))
+        setTodoList((prevToDoList) => [...prevToDoList, {id, content, checked}])
+  }
+
+  const handleCheckButton = (value) => {
+    setTodoList(toDoList.map((currTask) => {
+      if(currTask.content === value)
+        return { ...currTask, checked: !currTask.checked }
+      else
+        return currTask;
+    }))
   }
 
   const handleDeleteButton = (value) => {
-    setTodoList(toDoList.filter((currTask) => currTask != value ))
+    setTodoList(toDoList.filter((currTask) => currTask.content != value ))
   }
 
   const handleClearAllButton = () => {
@@ -37,11 +47,13 @@ const ToDo = () => {
       <section className='myUnOrdList'>
         <ul>
           {
-            toDoList.map((currTask, index) => {
+            toDoList.map((currTask) => {
               return (
                 <ToDoList 
-                  key={index}
-                  currTask={currTask}
+                  key={currTask.id}
+                  content={currTask.content}
+                  checked={currTask.checked}
+                  handleCheckButton={handleCheckButton} 
                   handleDeleteButton={handleDeleteButton} 
                 />
               )
